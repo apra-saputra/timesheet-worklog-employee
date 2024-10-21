@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   renderThumb,
@@ -11,12 +10,13 @@ import Links from "./components/Links";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { IRoute } from "@/types/types";
-import { useRouter } from "next/navigation";
 import React, { PropsWithChildren, useContext } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { HiX } from "react-icons/hi";
 import { HiBolt } from "react-icons/hi2";
 import { HiOutlineArrowRightOnRectangle } from "react-icons/hi2";
+import { SignedOut } from "@clerk/nextjs";
+import { SignedIn, UserButton } from "@clerk/clerk-react";
 
 export interface SidebarProps extends PropsWithChildren {
   routes: IRoute[];
@@ -26,6 +26,7 @@ export interface SidebarProps extends PropsWithChildren {
 function Sidebar(props: SidebarProps) {
   //   const router = getRedirectMethod() === "client" ? useRouter() : null;
   const { routes } = props;
+  const session = false;
 
   const handleSignOut = async () => {
     // e.preventDefault();
@@ -40,7 +41,7 @@ function Sidebar(props: SidebarProps) {
       } ${props.open ? "" : "-translate-x-[120%] xl:translate-x-[unset]"}`}
     >
       <Card
-        className={`m-3 ml-3 h-[96.5vh] w-full overflow-hidden !rounded-lg pe-4 sm:my-4 sm:mr-4 md:m-5 md:mr-[-50px]`}
+        className={`m-3 ml-3 h-[96.5vh] w-full overflow-hidden !rounded-lg sm:my-4 sm:mr-4 md:m-5 md:mr-[-50px]`}
       >
         <Scrollbars
           autoHide
@@ -73,38 +74,23 @@ function Sidebar(props: SidebarProps) {
             {/* Free Horizon Card    */}
             <div className="mb-9 mt-7">
               {/* Sidebar profile info */}
-              <div className="mt-5 flex w-full items-center rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
-                <a href="/dashboard/dashboard/settings">
-                  <Avatar className="min-h-10 min-w-10">
-                    <AvatarImage
-                      src={"https://avatar.iran.liara.run/public/boy"}
-                    />
-                    <AvatarFallback className="font-bold dark:text-zinc-950">
-                      {/* {userDetails.full_name
-                        ? `${userDetails.full_name[0]}`
-                        : `${user?.user_metadata.email[0].toUpperCase()}`} */}
-                    </AvatarFallback>
-                  </Avatar>
-                </a>
-                <a href="/dashboard/settings">
-                  <p className="ml-2 mr-3 flex items-center text-sm font-semibold leading-none text-text dark:text-text">
-                    {"user"}
-                  </p>
-                </a>
-                <Button
-                  onClick={handleSignOut}
-                  variant="outline"
-                  className="ml-auto flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full p-0 text-center text-sm font-medium hover:dark:text-white"
-                  type="submit"
-                >
-                  <HiOutlineArrowRightOnRectangle
-                    className="h-4 w-4 stroke-2 text-text dark:text-text"
-                    width="16px"
-                    height="16px"
-                    color="inherit"
-                  />
-                </Button>
-              </div>
+              {session ? (
+                <div className="mt-5 flex w-full items-center rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
+                  <SignedIn>
+                    <UserButton />
+                  </SignedIn>
+                </div>
+              ) : (
+                <div className="mt-5 flex w-full items-center justify-between rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
+                  Not signed in <br />
+                  <Button
+                    variant={"secondary"}
+                    // onClick={() => signIn("google")}
+                  >
+                    Sign in
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </Scrollbars>

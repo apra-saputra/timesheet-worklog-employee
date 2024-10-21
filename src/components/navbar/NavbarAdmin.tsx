@@ -33,13 +33,8 @@ export default function AdminNavbar(props: {
             {brandText}
           </NavLink>
         </div>
-        <p className="text-md shrink capitalize text-zinc-950 dark:text-white md:text-3xl">
-          <NavLink
-            href="#"
-            className="font-bold capitalize hover:text-zinc-950 dark:hover:text-white"
-          >
-            {brandText}
-          </NavLink>
+        <p className="text-md shrink capitalize text-zinc-950 dark:text-white md:text-3xl select-none">
+          {brandText}
         </p>
       </div>
       <div className="w-[154px] min-w-max md:ml-auto md:w-[unset]">
