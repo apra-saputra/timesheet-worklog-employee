@@ -6,10 +6,7 @@ import { ThemeProvider } from "../theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import Layout from "@/components/layout/Layout";
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ClerkProvider {...pageProps}>

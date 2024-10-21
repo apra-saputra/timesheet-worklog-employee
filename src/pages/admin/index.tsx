@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-const index = () => {
+const Admin = () => {
   const router = useRouter();
   useEffect(() => {
     router.push("/admin/dashboard");
@@ -9,7 +9,7 @@ const index = () => {
     return () => {};
   }, []);
 
-  return <div>index</div>;
+  return <div>Admin</div>;
 };
 
-export default index;
+export default Admin;

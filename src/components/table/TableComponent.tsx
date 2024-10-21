@@ -35,7 +35,7 @@ export type PageInfo = {
 
 interface DataWithId {
   id: number;
-  [key: string]: any;
+  [key: string]: string | number;
 }
 
 interface ServerDataTableProps<TData extends DataWithId, TValue> {

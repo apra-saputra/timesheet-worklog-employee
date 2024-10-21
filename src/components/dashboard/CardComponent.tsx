@@ -1,12 +1,11 @@
 import React from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { IconType } from "react-icons/lib";
 import { MonthlyReportType } from "@/types/types";
 import { FaRegCalendarCheck } from "react-icons/fa6";
 
-interface CardProps extends MonthlyReportType {}
+// interface CardProps extends MonthlyReportType {}
 
-const CardComponent: React.FC<CardProps> = ({ ...props }) => {
+const CardComponent: React.FC<MonthlyReportType> = ({ ...props }) => {
   const getDescription = () => {
     let text = "";
 

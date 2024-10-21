@@ -35,70 +35,70 @@ export const dummyWorklogs: Worklog[] = [
     user: users[0], // John Doe
     project: { id: 1, name: "Project A", location: "A" },
     hoursWorked: 8,
-    date: "2024-10-01T08:00:00Z",
+    dateWorked: "2024-10-01T08:00:00Z",
   },
   {
     id: 2,
     user: users[1], // Michael
     project: { id: 2, name: "Project B", location: "B" },
     hoursWorked: 4,
-    date: "2024-10-01T12:00:00Z",
+    dateWorked: "2024-10-01T12:00:00Z",
   },
   {
     id: 3,
     user: users[0], // John Doe
     project: { id: 1, name: "Project A", location: "A" },
     hoursWorked: 6,
-    date: "2024-10-02T08:00:00Z",
+    dateWorked: "2024-10-02T08:00:00Z",
   },
   {
     id: 4,
     user: users[2], // Emily Johnson
     project: { id: 2, name: "Project B", location: "B" },
     hoursWorked: 8,
-    date: "2024-10-03T08:00:00Z",
+    dateWorked: "2024-10-03T08:00:00Z",
   },
   {
     id: 5,
     user: users[3], // Jane Smith
     project: { id: 1, name: "Project A", location: "A" },
     hoursWorked: 5,
-    date: "2024-10-04T09:00:00Z",
+    dateWorked: "2024-10-04T09:00:00Z",
   },
   {
     id: 6,
     user: users[0], // John Doe
     project: { id: 2, name: "Project B", location: "B" },
     hoursWorked: 7,
-    date: "2024-10-05T10:00:00Z",
+    dateWorked: "2024-10-05T10:00:00Z",
   },
   {
     id: 7,
     user: users[2], // Emily Johnson
     project: { id: 1, name: "Project A", location: "A" },
     hoursWorked: 8,
-    date: "2024-10-06T11:00:00Z",
+    dateWorked: "2024-10-06T11:00:00Z",
   },
   {
     id: 8,
     user: users[3], // Jane Smith
     project: { id: 2, name: "Project B", location: "B" },
     hoursWorked: 4,
-    date: "2024-10-07T12:00:00Z",
+    dateWorked: "2024-10-07T12:00:00Z",
   },
   {
     id: 9,
     user: users[0], // John Doe
     project: { id: 1, name: "Project A", location: "A" },
     hoursWorked: 8,
-    date: "2024-10-08T08:00:00Z",
+    dateWorked: "2024-10-08T08:00:00Z",
   },
   {
     id: 10,
     user: users[2], // Emily Johnson
     project: { id: 2, name: "Project B", location: "B" },
     hoursWorked: 6,
-    date: "2024-10-09T08:00:00Z",
+    dateWorked: "2024-10-09T08:00:00Z",
   },
 ];
 

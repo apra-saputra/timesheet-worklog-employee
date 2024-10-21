@@ -1,14 +1,12 @@
 "use client";
 
-/* eslint-disable */
-import NavLink from "@/components/link/NavLink";
 import { IRoute } from "@/types/types";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PropsWithChildren, useCallback } from "react";
+import { useCallback } from "react";
 
-interface SidebarLinksProps extends PropsWithChildren {
+interface SidebarLinksProps {
   routes: IRoute[];
-  [x: string]: any;
 }
 
 export function SidebarLinks(props: SidebarLinksProps) {
@@ -20,12 +18,6 @@ export function SidebarLinks(props: SidebarLinksProps) {
   const activeRoute = useCallback(
     (routeName: string) => {
       return pathname?.includes(routeName);
-    },
-    [pathname]
-  );
-  const activeLayout = useCallback(
-    (routeName: string) => {
-      return pathname?.includes("/ai");
     },
     [pathname]
   );
@@ -65,10 +57,10 @@ export function SidebarLinks(props: SidebarLinksProps) {
                   : "font-medium text-text dark:text-text"
               }`}
             >
-              <NavLink
+              <Link
                 href={route.layout ? route.layout + route.path : route.path}
                 key={key}
-                styles={{ width: "100%" }}
+                className="w-full"
               >
                 <div className="w-full items-center justify-center">
                   <div className="flex w-full items-center justify-center">
@@ -92,7 +84,7 @@ export function SidebarLinks(props: SidebarLinksProps) {
                     </p>
                   </div>
                 </div>
-              </NavLink>
+              </Link>
             </div>
           </div>
         );

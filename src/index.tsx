@@ -12,8 +12,8 @@ const Login: React.FC = () => {
     email: "",
     password: "",
   });
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [showPassword, setShowPassword] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
 
     try {
       // await loginMutation.mutateAsync({
@@ -35,10 +35,10 @@ const Login: React.FC = () => {
 
       setTimeout(() => {}, 1000);
 
-      setLoading(false);
+      // setLoading(false);
       // navigate("/");
     } catch (error) {
-      setLoading(false);
+      // setLoading(false);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",

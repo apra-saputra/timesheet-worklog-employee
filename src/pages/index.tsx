@@ -1,12 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { useAuth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { useRouter } from "next/router";
 import React, { Suspense, useEffect } from "react";
 
-const index = () => {
+const Home = () => {
   const { isSignedIn } = useAuth();
-  const router = useRouter();
 
   useEffect(() => {
     if (isSignedIn) redirect("/admin/dashboard");
@@ -29,4 +26,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Home;

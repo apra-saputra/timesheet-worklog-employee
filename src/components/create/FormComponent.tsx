@@ -48,13 +48,11 @@ const FormComponent: React.FC<FormComponentProps> = ({ className }) => {
         throw new Error("Date Invalid");
       }
       const values = { ...form, dateWorked };
-      const response = await axios("/api/logs", {
+      await axios("/api/logs", {
         method: "POST",
         data: values,
       });
-
-      // console.log(response);
-
+      
       toast({
         title: "Success",
         description: "Your record has been saved",

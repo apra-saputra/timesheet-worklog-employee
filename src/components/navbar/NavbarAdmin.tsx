@@ -1,13 +1,9 @@
 "use client";
 
-/* eslint-disable */
+import Link from "next/link";
 import AdminNavbarLinks from "./NavbarLinksAdmin";
-import NavLink from "@/components/link/NavLink";
 
-export default function AdminNavbar(props: {
-  brandText: string;
-  [x: string]: any;
-}) {
+export default function AdminNavbar(props: { brandText: string }) {
   const { brandText } = props;
 
   return (
@@ -26,12 +22,12 @@ export default function AdminNavbar(props: {
               /{" "}
             </span>
           </a>
-          <NavLink
+          <Link
             className="text-xs font-normal capitalize text-zinc-950 hover:underline dark:text-white dark:hover:text-white"
             href="#"
           >
             {brandText}
-          </NavLink>
+          </Link>
         </div>
         <p className="text-md shrink capitalize text-zinc-950 dark:text-white md:text-3xl select-none">
           {brandText}

@@ -20,7 +20,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       routes: IRoute[],
       pathname: string
     ): IRoute | undefined => {
-      for (let route of routes) {
+      for (const route of routes) {
         if (route.items) {
           const found = findCurrentRoute(route.items, pathname);
           if (found) return found;
@@ -37,7 +37,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
   return (
     <>
-      <Sidebar routes={routes} setOpen={setOpen} />
+      <Sidebar routes={routes} setOpen={setOpen} open={open} variant="" />
       <div className="h-full w-full dark:bg-background">
         <main
           className={`mx-2.5 flex-none transition-all dark:bg-background md:pr-2 xl:ml-[328px] min-h-screen`}

@@ -45,6 +45,6 @@ export type MonthlyReportType = {
 
 import { PrismaClient } from "@prisma/client";
 
-declare global {
-  var prisma: PrismaClient | undefined; // Anda bisa menggunakan | null juga
+export declare global {
+  let prisma: PrismaClient | undefined;
 }

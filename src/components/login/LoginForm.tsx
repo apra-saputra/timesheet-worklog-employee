@@ -9,7 +9,6 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-import { useSignUp, useSignIn, SignIn } from "@clerk/nextjs";
 
 type FormType = {
   email: string;
@@ -27,13 +26,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
   handleChange,
   form,
 }) => {
-  const { signIn } = useSignIn();
-  
-  const innerSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
+  const innerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     // console.log(signIn);
     // signIn
-    return await handleSubmit(e)
-  }
+    return await handleSubmit(e);
+  };
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -81,12 +78,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
             reset
           </Button>
           <div className="flex gap-2 items-center">
-            {/* {loading && <MoonLoader color="#fff" size={25} />} */}
             <Button>Submit</Button>
           </div>
         </CardFooter>
       </form>
-      {/* <SignIn/> */}
     </div>
   );
 };

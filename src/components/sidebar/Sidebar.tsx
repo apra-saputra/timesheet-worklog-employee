@@ -7,20 +7,19 @@ import {
   renderView,
 } from "@/components/scrollbar/Scrollbar";
 import Links from "./components/Links";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { IRoute } from "@/types/types";
-import React, { PropsWithChildren, useContext } from "react";
+import React from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { HiX } from "react-icons/hi";
 import { HiBolt } from "react-icons/hi2";
-import { HiOutlineArrowRightOnRectangle } from "react-icons/hi2";
-import { SignedOut } from "@clerk/nextjs";
 import { SignedIn, UserButton } from "@clerk/clerk-react";
 
-export interface SidebarProps extends PropsWithChildren {
+export interface SidebarProps {
   routes: IRoute[];
-  [x: string]: any;
+  open: boolean;
+  variant: string;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Sidebar(props: SidebarProps) {
@@ -29,11 +28,9 @@ function Sidebar(props: SidebarProps) {
   const session = false;
 
   const handleSignOut = async () => {
-    // e.preventDefault();
-    // supabase.auth.signOut();
-    // router.push("/dashboard/signin");
+    console.log("sign out");
   };
-  // SIDEBAR
+
   return (
     <div
       className={`lg:!z-99 fixed !z-[99] min-h-full w-[300px] transition-all md:!z-[99] xl:!z-0 ${
@@ -83,10 +80,7 @@ function Sidebar(props: SidebarProps) {
               ) : (
                 <div className="mt-5 flex w-full items-center justify-between rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
                   Not signed in <br />
-                  <Button
-                    variant={"secondary"}
-                    // onClick={() => signIn("google")}
-                  >
+                  <Button variant={"secondary"} onClick={handleSignOut}>
                     Sign in
                   </Button>
                 </div>

@@ -1,7 +1,13 @@
 "use client";
 
-export const renderTrack = ({ style, ...props }: any) => {
-  const trackStyle = {
+import React from "react";
+
+interface TrackProps extends React.HTMLAttributes<HTMLDivElement> {
+  style?: React.CSSProperties;
+}
+
+export const renderTrack = ({ style, ...props }: TrackProps) => {
+  const trackStyle: React.CSSProperties = {
     position: "absolute",
     maxWidth: "100%",
     transition: "opacity 200ms ease 0s",
@@ -12,21 +18,34 @@ export const renderTrack = ({ style, ...props }: any) => {
     borderRadius: 3,
     right: 0,
   };
+
   return (
     <div style={{ ...style, ...trackStyle }} className="xl:pr-3.5" {...props} />
   );
 };
-export const renderThumb = ({ style, ...props }: any) => {
-  const thumbStyle = {
+
+interface ThumbProps extends React.HTMLAttributes<HTMLDivElement> {
+  style?: React.CSSProperties;
+}
+
+export const renderThumb = ({ style, ...props }: ThumbProps) => {
+  const thumbStyle: React.CSSProperties = {
     borderRadius: 15,
   };
+
   return <div style={{ ...style, ...thumbStyle }} {...props} />;
 };
-export const renderView = ({ style, ...props }: any) => {
-  const viewStyle = {
+
+interface ViewProps extends React.HTMLAttributes<HTMLDivElement> {
+  style?: React.CSSProperties;
+}
+
+export const renderView = ({ style, ...props }: ViewProps) => {
+  const viewStyle: React.CSSProperties = {
     width: "100%",
     marginBottom: -22,
   };
+
   return (
     <div
       style={{ ...style, ...viewStyle }}
