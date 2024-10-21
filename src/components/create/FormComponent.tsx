@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DatePicker } from "../commons/DatePicker";
-import SelectProjectComponent from "../commons/SelectProjectComponent";
+import SelectProjectComponent from "../commons/SelectComponent";
 import { projects } from "@/utils/constants/dummyData";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { cn } from "@/lib/utils";

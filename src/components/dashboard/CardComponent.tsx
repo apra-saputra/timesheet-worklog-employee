@@ -35,10 +35,12 @@ const CardComponent: React.FC<MonthlyReportType> = ({ ...props }) => {
       <CardContent className="flex flex-col gap-4">
         <div className="grid w-full grid-flow-row grid-cols-3 place-items-center">
           <p>Absences</p>
-          <p>Avarge Hours</p>
+          <p>Average Hours</p>
           <p>Total Hours</p>
           <h3 className="text-2xl font-semibold">{props.absences}</h3>
-          <h3 className="text-2xl font-semibold">{props.averageHoursPerDay}</h3>
+          <h3 className="text-2xl font-semibold">
+            {props.averageHoursPerDay.toFixed(2)}
+          </h3>
           <h3 className="text-2xl font-semibold">{props.totalHoursWorked}</h3>
         </div>
         <p className="text-xs text-gray-500">{getDescription()}</p>

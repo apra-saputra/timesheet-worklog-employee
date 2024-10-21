@@ -14,7 +14,7 @@ interface HasIdAndName {
 }
 
 // Tipe Props untuk SelectProjectComponent
-interface SelectProjectComponentProps<T extends HasIdAndName> {
+interface SelectComponentProps<T extends HasIdAndName> {
   variable: number | string;
   onChange: (value: string) => void;
   data: T[];
@@ -22,12 +22,12 @@ interface SelectProjectComponentProps<T extends HasIdAndName> {
 }
 
 // Definisi komponen generik dengan T extends HasIdAndName
-const SelectProjectComponent = <T extends HasIdAndName>({
+const SelectComponent = <T extends HasIdAndName>({
   variable,
   onChange,
   data,
   placeholder,
-}: SelectProjectComponentProps<T>) => {
+}: SelectComponentProps<T>) => {
   return (
     <Select
       onValueChange={onChange}
@@ -49,4 +49,4 @@ const SelectProjectComponent = <T extends HasIdAndName>({
   );
 };
 
-export default SelectProjectComponent;
+export default SelectComponent;

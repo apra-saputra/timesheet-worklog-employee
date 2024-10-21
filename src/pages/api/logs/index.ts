@@ -25,14 +25,17 @@ const POST = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { userId } = req.query;
-    if (!userId) {
+    const { userId, month, year } = req.query;
+    if (!userId || !month || !year) {
       return res
         .status(400)
         .json({ message: "Missing required query parameters" });
     }
 
-    const logs = await viewLog(userId as string);
+    const monthInt = parseInt(month as string, 10);
+    const yearInt = parseInt(year as string, 10);
+
+    const logs = await viewLog(userId as string, monthInt, yearInt);
     return res.status(200).json({ message: "success get log", logs });
   } catch (error) {
     console.log(error);

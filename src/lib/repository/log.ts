@@ -1,4 +1,4 @@
-import { MonthlyReportType } from "@/types/types";
+import { MonthlyReportType, ViewLogOutputType } from "@/types/types";
 import { prisma } from "../prisma";
 import {
   eachDayOfInterval,
@@ -7,21 +7,86 @@ import {
   subMonths,
 } from "date-fns";
 
-export const viewLog = async (userId: string) => {
-  return await prisma.workLog.findMany({
-    where: { userId },
+export const viewLog = async (
+  userId: string,
+  month: number,
+  year: number
+): Promise<ViewLogOutputType[]> => {
+  const startDate = startOfMonth(new Date(year, month - 1));
+  const endDate = endOfMonth(new Date(year, month - 1));
+
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { name: true },
+  });
+
+  const workLogs = await prisma.workLog.findMany({
+    where: { userId, dateWorked: { gte: startDate, lte: endDate } },
     orderBy: { dateWorked: "desc" },
     select: {
       id: true,
-      user: true,
-      project: true,
+      project: {
+        select: {
+          name: true,
+        },
+      },
       dateWorked: true,
-      detail: true,
       hoursWorked: true,
-      createdAt: true,
+      detail: true,
     },
     take: 100,
   });
+
+  const resultMap: {
+    [key: string]: {
+      id: string;
+      projects: string[];
+      workdate: string;
+      complete: boolean;
+      detail: { [key: string]: number };
+    };
+  } = {};
+
+  workLogs.forEach((log) => {
+    // Konversi dateWorked dari UTC ke tanggal lokal
+    const localDate = new Date(log.dateWorked);
+    const workDate = localDate.toLocaleDateString("en-CA"); // Menggunakan format YYYY-MM-DD
+
+    const projectName = log.project.name;
+
+    if (!resultMap[workDate]) {
+      resultMap[workDate] = {
+        id: log.id,
+        projects: [],
+        workdate: workDate,
+        complete: false,
+        detail: {},
+      };
+    }
+
+    if (!resultMap[workDate].projects.includes(projectName)) {
+      resultMap[workDate].projects.push(projectName);
+    }
+
+    if (!resultMap[workDate].detail[projectName]) {
+      resultMap[workDate].detail[projectName] = 0;
+    }
+    resultMap[workDate].detail[projectName] += log.hoursWorked;
+
+    const totalHoursForDay = Object.values(resultMap[workDate].detail).reduce(
+      (acc, hours) => acc + hours,
+      0
+    );
+    resultMap[workDate].complete = totalHoursForDay >= 8;
+  });
+
+  // Convert resultMap to an array and add userName
+  const finalResult = Object.values(resultMap).map((entry) => ({
+    userName: user?.name || "Unknown", // Use 'Unknown' if user name is not found
+    ...entry,
+  }));
+
+  return finalResult;
 };
 
 type CreatePayloadType = {
@@ -168,15 +233,22 @@ export const generateMonthlyReport = async (
   const today = new Date();
   const isTodayInMonth = today >= startDate && today <= endDate;
 
+  const workdaysUntilToday = isTodayInMonth
+    ? allDaysInMonth.filter(
+        (day) => day <= today && !(day.getDay() === 0 || day.getDay() === 6)
+      ).length
+    : allDaysInMonth.filter(
+        (day) => !(day.getDay() === 0 || day.getDay() === 6)
+      ).length;
+
   // Generate report with percentage change
   const report: MonthlyReportType[] = Object.entries(currentProjectsMap).map(
     ([projectId, projectData]) => {
       const workDaysCount = projectData.workDays.size;
-      const totalDaysInMonth = allDaysInMonth.length;
 
       // Calculate absences based on whether today is included in the month
       const absences =
-        totalDaysInMonth -
+        workdaysUntilToday -
         (isTodayInMonth &&
         !projectData.workDays.has(today.toISOString().split("T")[0])
           ? workDaysCount - 1

@@ -43,6 +43,17 @@ export type MonthlyReportType = {
   percentageChange: number | null;
 };
 
+export type ViewLogOutputType = {
+  id: string;
+  userName: string; // Nama pengguna
+  projects: string[]; // Daftar nama proyek
+  workdate: string; // Tanggal kerja dalam format YYYY-MM-DD
+  complete: boolean; // Status apakah total jam kerja mencapai 8 jam
+  detail: {
+    [projectName: string]: number; // Detail jam kerja per proyek
+  };
+};
+
 import { PrismaClient } from "@prisma/client";
 
 export declare global {
